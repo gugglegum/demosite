@@ -1,0 +1,67 @@
+a:link { text-decoration: none; color: #69C; }
+a:visited { text-decoration: none; color: #369; }
+a:active { text-decoration: underline; color: #f00; }
+a:hover	{ text-decoration: underline; color: #f00; }
+
+body { max-width: 80em; margin: 0 auto 1em auto; }
+table#pizzas { border-collapse: collapse; }
+table#pizzas td { vertical-align: top; }
+table#pizzas td.image {}
+table#pizzas td.name { padding: 0 2em 0.5em 0; max-width: 30em; }
+table#pizzas td.name h4 { margin: 0; font-size: 24px; }
+table#pizzas td.name .description { margin: 0.5em 0; font-size: 80%; color: #999; font-style: italic; }
+table#pizzas td.price { padding: 0.5em 0; font-weight: bold; }
+
+#logo {
+    position: absolute;
+    margin-top: 0.5em;
+    font-size: 200%;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    background-color: #cec;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+ul#topMenu {
+    margin: 0 0 0 15em;
+}
+ul#topMenu li {
+    display: block;
+    padding: 1em 1em;
+    background-color: #cdc;
+    float: left;
+    font-weight: bold;
+}
+ul#topMenu li.current { color: #369; background-color: #bcb; }
+
+ul#subMenu {
+    padding: 20px;
+    margin: 0;
+    width: 13em;
+    position: absolute;
+    background-color: #cfc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+ul#subMenu li {
+    display: block;
+    padding: 0.5em 1em;
+}
+ul#subMenu li.current { color: #000; background-color: #beb; }
+
+#middle { clear: left; padding-top: 2em; }
+#main { clear: left; padding-top: 2em; }
+
+#middle #content { margin-left: 17em; }
+#content {
+    font: normal 17px serif;
+    line-height: 1.5;
+    border: 1px solid #eee;
+    padding: 10px 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+#content h1 { margin-top: 0; }
+#content img { max-width: 56em; }
