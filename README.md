@@ -65,7 +65,7 @@ RewriteRule .* index.php [L,QSA]
 
 ### Локальное доменное имя
 
-Если у вас нет доменного имени для вашего сайта, то можете выбрать любое, например, "demosite.dev", прописав его в своём локальном файле [hosts](https://ru.wikipedia.org/wiki/Hosts). В Windows этот файл находится в `%SystemRoot%\System32\drivers\etc\hosts`. Отредактируйте его, добавив в него всего одну строчку:
+Если у вас нет доменного имени для вашего сайта, то можете выбрать любое, например, "demosite.dev", прописав его в своём локальном файле [`/etc/hosts`](https://ru.wikipedia.org/wiki/Hosts). В Windows этот файл находится в `%SystemRoot%\System32\drivers\etc\hosts`. Отредактируйте его, добавив в него всего одну строчку:
 
 ```
 127.0.0.1 demosite.dev
