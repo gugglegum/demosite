@@ -14,14 +14,14 @@ class PizzaController extends AbstractController
         while (($item = $result->fetch_assoc()) !== null) {
             $this->view->subMenu[] = [
                 'name' => $item['name'],
-                'route' => ['pizza/topic', 'topic' => $item['urlPart']],
+                'route' => ['pizza/topic', 'topic' => $item['urlName']],
             ];
         }
     }
 
     public function actionIndex()
     {
-        $result = $this->db->query('SELECT `p`.*, `t`.`urlPart` `topicUrlPart` FROM `pizzas` `p`
+        $result = $this->db->query('SELECT `p`.*, `t`.`urlName` `topicUrlName` FROM `pizzas` `p`
             INNER JOIN `topics` `t` ON `t`.`id` = `p`.`topicId`
             ORDER BY `p`.`name` ASC');
 
@@ -38,14 +38,14 @@ class PizzaController extends AbstractController
 
     public function actionTopic(array $params)
     {
-        $result = $this->db->query('SELECT * FROM `topics` WHERE `urlPart` = ' . $this->db->quote($params['topic']));
+        $result = $this->db->query('SELECT * FROM `topics` WHERE `urlName` = ' . $this->db->quote($params['topic']));
         if (! $topic = $result->fetch_assoc()) {
             throw new HttpException(404);
         }
 
-        $result = $this->db->query('SELECT `p`.*, `t`.`urlPart` `topicUrlPart` FROM `pizzas` `p`
+        $result = $this->db->query('SELECT `p`.*, `t`.`urlName` `topicUrlName` FROM `pizzas` `p`
             INNER JOIN `topics` `t` ON `t`.`id` = `p`.`topicId`
-            WHERE `t`.`urlPart` = ' . $this->db->quote($params['topic']) . '
+            WHERE `t`.`urlName` = ' . $this->db->quote($params['topic']) . '
             ORDER BY `p`.`name` ASC');
 
         $items = [];
@@ -61,7 +61,7 @@ class PizzaController extends AbstractController
 
     public function actionItem($params)
     {
-        $result = $this->db->query('SELECT * FROM `topics` WHERE `urlPart` = ' . $this->db->quote($params['topic']));
+        $result = $this->db->query('SELECT * FROM `topics` WHERE `urlName` = ' . $this->db->quote($params['topic']));
         if (! $topic = $result->fetch_assoc()) {
             throw new HttpException(404);
         }

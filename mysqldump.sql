@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 08 2016 г., 14:24
+-- Время создания: Фев 08 2016 г., 16:49
 -- Версия сервера: 5.5.40-MariaDB
 -- Версия PHP: 5.6.5
 
@@ -69,14 +69,14 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `id` int(10) unsigned NOT NULL COMMENT 'ID',
   `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название',
   `title` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Заголовок страницы категории',
-  `urlPart` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Часть URL'
+  `urlName` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Часть URL'
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Категории товаров';
 
 --
 -- Дамп данных таблицы `topics`
 --
 
-INSERT INTO `topics` (`id`, `name`, `title`, `urlPart`) VALUES
+INSERT INTO `topics` (`id`, `name`, `title`, `urlName`) VALUES
 (1, 'С мясом', 'Пиццы с мясом', 'meat'),
 (2, 'С курицей', 'Пиццы с курицей', 'chicken'),
 (3, 'С рыбой', 'Пиццы с рыбой', 'fish'),
@@ -96,7 +96,7 @@ ALTER TABLE `pizzas`
 -- Индексы таблицы `topics`
 --
 ALTER TABLE `topics`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `urlPart` (`urlPart`);
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `urlPart` (`urlName`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
