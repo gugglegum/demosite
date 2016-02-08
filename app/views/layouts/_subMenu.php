@@ -10,12 +10,17 @@ use app\helpers\Url;
     <?php foreach ($this->subMenu as $menuItem) { ?>
         <?php
         $href = Url::to($menuItem['route']);
-        if ($href !== $_SERVER['REQUEST_URI']) {
+        if (strpos($_SERVER['REQUEST_URI'], $href) !== 0) {
             ?>
             <li><a href="<?= Html::encode($href) ?>"><?= Html::encode($menuItem['name']) ?></a></li><?php
         } else {
-            ?>
-            <li class="current"><?= Html::encode($menuItem['name']) ?></li><?php
+            if ($_SERVER['REQUEST_URI'] !== $href) {
+                ?>
+                <li class="current"><?= Html::encode($menuItem['name']) ?></li><?php
+            } else {
+                ?>
+                <li class="current"><?= Html::encode($menuItem['name']) ?></li><?php
+            }
         }
     }?>
 </ul>

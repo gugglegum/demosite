@@ -10,18 +10,20 @@ class PizzaController extends AbstractController
     {
         parent::__construct();
 
-        $result = $this->db->query('SELECT * FROM `pizzas` ORDER BY `name` ASC');
+        $result = $this->db->query('SELECT * FROM `topics` ORDER BY `id` ASC');
         while (($item = $result->fetch_assoc()) !== null) {
             $this->view->subMenu[] = [
                 'name' => $item['name'],
-                'route' => ['pizza/item', 'id' => $item['id']],
+                'route' => ['pizza/topic', 'topic' => $item['urlPart']],
             ];
         }
     }
 
     public function actionIndex()
     {
-        $result = $this->db->query('SELECT * FROM `pizzas` ORDER BY `name` ASC');
+        $result = $this->db->query('SELECT `p`.*, `t`.`urlPart` `topicUrlPart` FROM `pizzas` `p`
+            INNER JOIN `topics` `t` ON `t`.`id` = `p`.`topicId`
+            ORDER BY `p`.`name` ASC');
 
         $items = [];
         while (($item = $result->fetch_assoc()) !== null) {
@@ -30,16 +32,42 @@ class PizzaController extends AbstractController
 
         return $this->render('pizza/index', [
             'items' => $items,
+            'title' => 'Все пиццы',
+        ]);
+    }
+
+    public function actionTopic(array $params)
+    {
+        $result = $this->db->query('SELECT * FROM `topics` WHERE `urlPart` = ' . $this->db->quote($params['topic']));
+        if (! $topic = $result->fetch_assoc()) {
+            throw new HttpException(404);
+        }
+
+        $result = $this->db->query('SELECT `p`.*, `t`.`urlPart` `topicUrlPart` FROM `pizzas` `p`
+            INNER JOIN `topics` `t` ON `t`.`id` = `p`.`topicId`
+            WHERE `t`.`urlPart` = ' . $this->db->quote($params['topic']) . '
+            ORDER BY `p`.`name` ASC');
+
+        $items = [];
+        while (($item = $result->fetch_assoc()) !== null) {
+            $items[] = $item;
+        }
+
+        return $this->render('pizza/index', [
+            'items' => $items,
+            'title' => $topic['title'],
         ]);
     }
 
     public function actionItem($params)
     {
+        $result = $this->db->query('SELECT * FROM `topics` WHERE `urlPart` = ' . $this->db->quote($params['topic']));
+        if (! $topic = $result->fetch_assoc()) {
+            throw new HttpException(404);
+        }
+
         $result = $this->db->query('SELECT * FROM `pizzas` WHERE id = ' . $this->db->quote($params['id']));
-
-        $pizza = $result->fetch_assoc();
-
-        if ($pizza === null) {
+        if (! $pizza = $result->fetch_assoc()) {
             throw new HttpException(404);
         }
 

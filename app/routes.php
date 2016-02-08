@@ -20,9 +20,13 @@ return [
         'pattern' => '#^/pizza$#',
         'reverse' => '/pizza',
     ],
+    'pizza/topic' => [
+        'pattern' => '#^/pizza/(?<topic>\w+)$#',
+        'reverse' => '/pizza/<topic>',
+    ],
     'pizza/item' => [
-        'pattern' => '#^/pizza/(?<id>\d+)$#',
-        'reverse' => '/pizza/<id>',
+        'pattern' => '#^/pizza/(?<topic>\w+)/(?<id>\d+)$#',
+        'reverse' => '/pizza/<topic>/<id>',
     ],
 
     // Солнечная Система
