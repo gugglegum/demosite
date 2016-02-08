@@ -16,7 +16,7 @@ use app\helpers\Url;
         } else {
             if ($_SERVER['REQUEST_URI'] !== $href) {
                 ?>
-                <li class="current"><?= Html::encode($menuItem['name']) ?></li><?php
+                <li class="current"><a href="<?= Html::encode($href) ?>"><?= Html::encode($menuItem['name']) ?></a></li><?php
             } else {
                 ?>
                 <li class="current"><?= Html::encode($menuItem['name']) ?></li><?php
