@@ -6,6 +6,7 @@ class ErrorController extends AbstractController
 {
     public function __construct()
     {
+        $this->_initDb = false;
         parent::__construct();
         $this->layout = 'layouts/error';
     }
