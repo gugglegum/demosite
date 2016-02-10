@@ -16,18 +16,18 @@ abstract class App
      */
     public static function run()
     {
-        // Загрузка и объединение конфигов
-        if (!file_exists(PSR4_ROOT . '/config.local.php')) {
-            throw new Exception('You have to create file config.local.php with your settings');
-        }
-        self::$config = ((array) require(PSR4_ROOT . '/config.local.php')) + ((array) require(PSR4_ROOT . '/config.php'));
-
-        // Маршрутизация запроса
-        $router = Router::getInstance();
-        $route = $router->route($_SERVER['REQUEST_URI']);
-
-        // Вызов обработчика и обработка ошибок
         try {
+            // Загрузка и объединение конфигов
+            if (!file_exists(PSR4_ROOT . '/config.local.php')) {
+                throw new Exception('You have to create file config.local.php with your settings');
+            }
+            self::$config = ((array) require(PSR4_ROOT . '/config.local.php')) + ((array) require(PSR4_ROOT . '/config.php'));
+
+            // Маршрутизация запроса
+            $router = Router::getInstance();
+            $route = $router->route($_SERVER['REQUEST_URI']);
+
+            // Вызов обработчика
             self::_runAction($route['controller'], $route['action'], $route['params']);
         } catch (HttpException $e) {
             if ($e->getCode() === 404) {
